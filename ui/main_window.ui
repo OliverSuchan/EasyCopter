@@ -23,10 +23,46 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;W: Fly upward&lt;/p&gt;&lt;p&gt;S: Fly downward&lt;/p&gt;&lt;p&gt;A: Turn left (counter clockwise)&lt;/p&gt;&lt;p&gt;D: Turn right (clockwise)&lt;/p&gt;&lt;p&gt;Arrow Up: Fly forward&lt;/p&gt;&lt;p&gt;Arrow Down: Fly backward&lt;/p&gt;&lt;p&gt;Arrow Left: Fly left&lt;/p&gt;&lt;p&gt;Arrow Right: Fly right&lt;/p&gt;&lt;p&gt;O: Take off&lt;/p&gt;&lt;p&gt;L: Land&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
       </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Steuerung</string>
+       </attribute>
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>30</y>
+          <width>211</width>
+          <height>281</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;W: Fly upward&lt;/p&gt;&lt;p&gt;S: Fly downward&lt;/p&gt;&lt;p&gt;A: Turn left (counter clockwise)&lt;/p&gt;&lt;p&gt;D: Turn right (clockwise)&lt;/p&gt;&lt;p&gt;Arrow Up: Fly forward&lt;/p&gt;&lt;p&gt;Arrow Down: Fly backward&lt;/p&gt;&lt;p&gt;Arrow Left: Fly left&lt;/p&gt;&lt;p&gt;Arrow Right: Fly right&lt;/p&gt;&lt;p&gt;O: Take off&lt;/p&gt;&lt;p&gt;L: Land&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>OpenCV</string>
+       </attribute>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>150</y>
+          <width>80</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Starten</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>

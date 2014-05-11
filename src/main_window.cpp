@@ -130,3 +130,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
     writeSettings();
     QMainWindow::closeEvent(event);
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    new ImageConverter(0, NULL, this);
+}
