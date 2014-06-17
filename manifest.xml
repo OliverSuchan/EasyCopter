@@ -1,0 +1,26 @@
+<package>
+  <description brief="EasyCopter">
+
+     EasyCopter
+
+  </description>
+  <author>Oliver</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/EasyCopter</url>
+
+
+  <rosdep name="qt4"/>
+
+  <!-- rosbuild1 -->
+  <depend package="qt_build"/>
+  <depend package="roscpp"/>
+  <depend package="cv_bridge" />
+  <depend package="image_transport" />
+  
+  <rosbuild2>
+    <depend package="qt_build"/>
+    <depend package="roscpp"/>
+  </rosbuild2>
+  
+</package>
