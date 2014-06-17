@@ -5,6 +5,8 @@
 #include <tuple>
 #include <functional>
 
+class FlightController;
+
 class Globals
 {
 public:
@@ -18,6 +20,7 @@ public:
     std::vector<std::tuple<int, std::function<void()>>> m_rgtpivpKeyEvents;
     double m_dLinearAcceleration;
     double m_dAngularAcceleration;
+    bool m_dActivateFaceDetection;
 
 private:
     Globals();
@@ -26,9 +29,5 @@ private:
     ~Globals();
 
 };
-
-#else
-
-class Globals;
 
 #endif //__GLOBALS_H

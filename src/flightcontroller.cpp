@@ -117,3 +117,10 @@ Globals::CommandType FlightController::getCommandType()
 {
     return m_ctCurrentCommandType;
 }
+
+FlightController &FlightController::getInstance()
+{
+    static FlightController fcController(0, NULL);
+    return fcController;
+}
+

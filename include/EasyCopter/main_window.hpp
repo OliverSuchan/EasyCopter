@@ -31,13 +31,13 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindowDesign ui;
-    FlightController m_fcController;
     void readSettings();
     void writeSettings();
     void showNoMasterMessage();
-    void takeOff();
 
 };
 

@@ -15,8 +15,8 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/objdetect/objdetect.hpp>
-#include "ui_opencv.h"
 #include <iostream>
+#include "flightcontroller.hpp"
 
 static const std::string OPENCV_WINDOW = "Image window";
 static std::string face_cascade_name = "haarcascade_frontalface_alt.xml";
@@ -24,18 +24,15 @@ static std::string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
 static cv::CascadeClassifier face_cascade;
 static cv::CascadeClassifier eyes_cascade;
 
-class ImageConverter : public QMainWindow
+class ImageConverter
 {
-  Ui::OpenCVDesign ui;
   void init(int argc, char** argv);
   cv::Mat detectAndDisplay(cv::Mat frame);
   void imageCb(const sensor_msgs::ImageConstPtr& msg);
-
-protected:
-  void resizeEvent(QResizeEvent *p_pqreResizeEvent);
+  //CvCapture* capture;
 
 public:
-  ImageConverter(int argc, char **argv, QWidget *parent = 0);
+  ImageConverter(int argc, char **argv);
   ~ImageConverter();
 
 };

@@ -28,12 +28,13 @@ private:
     Globals::CommandType m_ctCurrentCommandType;
     int m_iFrequency;
     void run();
-
-public:
     FlightController(int p_iArgc, char **p_ppcArgv);
     FlightController(FlightController const&) = delete;
     FlightController& operator =(FlightController const&) = delete;
     ~FlightController();
+
+public:
+
     bool isConnected();
     void publishCommand(geometry_msgs::Twist p_gmtCommand);
     void takeOff();
@@ -44,11 +45,8 @@ public:
     void setRunLastCommand(bool p_bRunLastCommand);
     void setCommandType(Globals::CommandType p_ctCommandType);
     Globals::CommandType getCommandType();
+    static FlightController &getInstance();
 
 };
-
-#else
-
-class FlightController;
 
 #endif //__FLIGHT_CONTROLLER_H

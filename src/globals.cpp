@@ -1,8 +1,9 @@
-#include "../include/EasyCopter/globals.hpp"
+#include "../include/EasyCopter/flightcontroller.hpp"
 
 Globals::Globals()
     : m_dLinearAcceleration(1.0),
-      m_dAngularAcceleration(1.0)
+      m_dAngularAcceleration(1.0),
+      m_dActivateFaceDetection(false)
 {
 
 }

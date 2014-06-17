@@ -4,38 +4,37 @@
 using namespace Qt;
 
 MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
-    : QMainWindow(parent),
-      m_fcController(argc, argv)
+    : QMainWindow(parent)
 {
     ui.setupUi(this);
-    m_fcController.startThread();
-    Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_O,  [=](){ m_fcController.takeOff(); }));
-    Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_L, [=](){ m_fcController.land(); }));
+    FlightController::getInstance().startThread();
+    Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_O,  [=](){ FlightController::getInstance().takeOff(); }));
+    Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_L, [=](){ FlightController::getInstance().land(); }));
     Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_W, [=](){ geometry_msgs::Twist command;
                                                                                          command.linear.z = Globals::getInstance().m_dLinearAcceleration;
-                                                                                         m_fcController.publishCommand(command);}));
+                                                                                         FlightController::getInstance().publishCommand(command);}));
     Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_S, [=](){ geometry_msgs::Twist command;
                                                                                          command.linear.z = -Globals::getInstance().m_dLinearAcceleration;
-                                                                                         m_fcController.publishCommand(command); }));
+                                                                                         FlightController::getInstance().publishCommand(command); }));
     Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_A, [=](){ geometry_msgs::Twist command;
                                                                                          command.angular.z = Globals::getInstance().m_dAngularAcceleration;
-                                                                                         m_fcController.publishCommand(command);}));
+                                                                                         FlightController::getInstance().publishCommand(command);}));
     Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_D, [=](){ geometry_msgs::Twist command;
                                                                                          command.angular.z = -Globals::getInstance().m_dAngularAcceleration;
-                                                                                         m_fcController.publishCommand(command);}));
+                                                                                         FlightController::getInstance().publishCommand(command);}));
 
     Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_Up, [=](){ geometry_msgs::Twist command;
                                                                                          command.linear.x = Globals::getInstance().m_dLinearAcceleration;
-                                                                                         m_fcController.publishCommand(command);}));
+                                                                                         FlightController::getInstance().publishCommand(command);}));
     Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_Down, [=](){ geometry_msgs::Twist command;
                                                                                          command.linear.x = -Globals::getInstance().m_dLinearAcceleration;
-                                                                                         m_fcController.publishCommand(command);}));
+                                                                                         FlightController::getInstance().publishCommand(command);}));
     Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_Left, [=](){ geometry_msgs::Twist command;
                                                                                          command.linear.y = Globals::getInstance().m_dLinearAcceleration;
-                                                                                         m_fcController.publishCommand(command);}));
+                                                                                         FlightController::getInstance().publishCommand(command);}));
     Globals::getInstance().m_rgtpivpKeyEvents.push_back(std::make_tuple(Qt::Key_Right, [=](){ geometry_msgs::Twist command;
                                                                                          command.linear.y = -Globals::getInstance().m_dLinearAcceleration;
-                                                                                         m_fcController.publishCommand(command);}));
+                                                                                         FlightController::getInstance().publishCommand(command);}));
     QObject::connect(ui.actionAbout_Qt, SIGNAL(triggered(bool)), qApp, SLOT(aboutQt()));
     readSettings();
     setWindowIcon(QIcon(":/images/icon.png"));
@@ -46,7 +45,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    m_fcController.stopThread();
+    FlightController::getInstance().stopThread();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *p_pqkeEvent)
@@ -68,13 +67,8 @@ void MainWindow::showNoMasterMessage() {
     close();
 }
 
-void MainWindow::takeOff()
-{
-    m_fcController.takeOff();
-}
-
 void MainWindow::on_button_connect_clicked(bool check ) {
-    if(m_fcController.isConnected())
+    if(FlightController::getInstance().isConnected())
     {
         this->ui.button_connect->setEnabled(false);
     }
@@ -133,5 +127,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::on_pushButton_clicked()
 {
-    new ImageConverter(0, NULL, this);
+    new ImageConverter(0, NULL);
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    Globals::getInstance().m_dActivateFaceDetection = !Globals::getInstance().m_dActivateFaceDetection;
 }
