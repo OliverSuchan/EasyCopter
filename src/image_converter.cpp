@@ -14,7 +14,8 @@ ImageConverter::ImageConverter(int argc, char **argv)
 {
     cv::namedWindow(OPENCV_WINDOW, CV_WINDOW_KEEPRATIO);
     //capture = cvCaptureFromCAM(-1);
-    capture = cvCaptureFromFile("/home/owley/Downloads/Who the FK is LeFloid.mp4");
+    if(DEBUG_MODE)
+        capture = cvCaptureFromFile("/home/owley/Downloads/Who the FK is LeFloid.mp4");
     face_cascade.load( face_cascade_name );
     eyes_cascade.load( eyes_cascade_name );
     init(argc, argv);
@@ -75,14 +76,16 @@ cv::Mat ImageConverter::detectAndDisplay( cv::Mat frame )
         {
             if(cmFaceToMatch.x + cmFaceToMatch.width / 2 < (frame_gray.cols - cmFaceToMatch.width) / 2)
             {
-                std::cout << "rechts drehen" << std::endl;
+                if(DEBUG_MODE)
+                    std::cout << "rechts drehen" << std::endl;
                 geometry_msgs::Twist command;
                 command.angular.z = -Globals::getInstance()->m_dAngularAcceleration;
                 FlightController::getInstance().publishCommand(command);
             }
             else
             {
-                std::cout << "links drehen" << std::endl;
+                if(DEBUG_MODE)
+                    std::cout << "links drehen" << std::endl;
                 geometry_msgs::Twist command;
                 command.angular.z = Globals::getInstance()->m_dAngularAcceleration;
                 FlightController::getInstance().publishCommand(command);
@@ -90,14 +93,16 @@ cv::Mat ImageConverter::detectAndDisplay( cv::Mat frame )
 
             if(cmFaceToMatch.y + cmFaceToMatch.height / 2 < (frame_gray.rows - cmFaceToMatch.height) / 2)
             {
-                std::cout << "runter" << std::endl;
+                if(DEBUG_MODE)
+                    std::cout << "runter" << std::endl;
                 geometry_msgs::Twist command;
                 command.linear.z = -Globals::getInstance()->m_dLinearAcceleration;
                 FlightController::getInstance().publishCommand(command);
             }
             else
             {
-                std::cout << "hoch" << std::endl;
+                if(DEBUG_MODE)
+                    std::cout << "hoch" << std::endl;
                 geometry_msgs::Twist command;
                 command.linear.z = Globals::getInstance()->m_dLinearAcceleration;
                 FlightController::getInstance().publishCommand(command);
@@ -107,14 +112,16 @@ cv::Mat ImageConverter::detectAndDisplay( cv::Mat frame )
             std::cout << distance << std::endl;
             if(distance >= 50)
             {
-                std::cout << "vorwärts" << std::endl;
+                if(DEBUG_MODE)
+                    std::cout << "vorwärts" << std::endl;
                 geometry_msgs::Twist command;
                 command.linear.x = Globals::getInstance()->m_dLinearAcceleration;
                 FlightController::getInstance().publishCommand(command);
             }
             else if(distance <= 20)
             {
-                std::cout << "rückwärts" << std::endl;
+                if(DEBUG_MODE)
+                    std::cout << "rückwärts" << std::endl;
                 geometry_msgs::Twist command;
                 command.linear.x = -Globals::getInstance()->m_dLinearAcceleration;
                 FlightController::getInstance().publishCommand(command);
@@ -137,8 +144,11 @@ void ImageConverter::imageCb(const sensor_msgs::ImageConstPtr &msg)
         return;
     }
 
-    cv::Mat faceRecognition = detectAndDisplay(cvQueryFrame(capture));
-    //cv::Mat faceRecognition = detectAndDisplay(cv_ptr->image);
+    cv::Mat cmFaceRecognition;
+    if(DEBUG_MODE)
+        cmFaceRecognition = detectAndDisplay(cvQueryFrame(capture));
+    else
+        cmFaceRecognition = detectAndDisplay(cv_ptr->image);
     cv::waitKey(3);
-    cv::imshow(OPENCV_WINDOW, faceRecognition);
+    cv::imshow(OPENCV_WINDOW, cmFaceRecognition);
 }

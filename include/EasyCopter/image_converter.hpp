@@ -20,6 +20,8 @@
 #include "flightcontroller.hpp"
 #include "face_recognition.hpp"
 
+#define DEBUG_MODE 0
+
 static const std::string OPENCV_WINDOW = "Image window";
 static std::string face_cascade_name = "haarcascade_frontalface_alt.xml";
 static std::string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
