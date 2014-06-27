@@ -23,7 +23,7 @@ public:
     double m_dLinearAcceleration;
     double m_dAngularAcceleration;
     bool m_dActivateFaceDetection;
-    cv::Mat m_cmCurrentFace;
+    std::vector<cv::Mat> m_cmCurrentFaces;
     void addDetectedFace(cv::Mat p_cmDetectedFace);
 
 signals:

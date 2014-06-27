@@ -14,7 +14,7 @@ ImageConverter::ImageConverter(int argc, char **argv)
 {
     cv::namedWindow(OPENCV_WINDOW, CV_WINDOW_KEEPRATIO);
     //capture = cvCaptureFromCAM(-1);
-    //capture = cvCaptureFromFile("/home/owley/Downloads/Who the FK is LeFloid.mp4");
+    capture = cvCaptureFromFile("/home/owley/Downloads/Who the FK is LeFloid.mp4");
     face_cascade.load( face_cascade_name );
     eyes_cascade.load( eyes_cascade_name );
     init(argc, argv);
@@ -45,10 +45,14 @@ cv::Mat ImageConverter::detectAndDisplay( cv::Mat frame )
     for( size_t i = 0; i < faces.size(); i++ )
     {
         Globals::getInstance()->addDetectedFace(frame(faces[i]));
-        if(Globals::getInstance()->m_cmCurrentFace.data)
+        for(auto aItem : Globals::getInstance()->m_cmCurrentFaces)
         {
-            if(FaceRecognition().matchImages(Globals::getInstance()->m_cmCurrentFace, frame(faces[i])))
-                cmFaceToMatch = faces[i];
+            if(aItem.data)
+                if(FaceRecognition().matchImages(aItem, frame(faces[i])))
+                {
+                    cmFaceToMatch = faces[i];
+                    break;
+                }
         }
         cv::Point center( faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5 );
         cv::ellipse( frame, center, cv::Size( faces[i].width*0.5, faces[i].height*0.5), 0, 0, 360, cv::Scalar( 255, 0, 255 ), 4, 8, 0 );
@@ -133,8 +137,8 @@ void ImageConverter::imageCb(const sensor_msgs::ImageConstPtr &msg)
         return;
     }
 
-    //cv::Mat faceRecognition = detectAndDisplay(cvQueryFrame(capture));
-    cv::Mat faceRecognition = detectAndDisplay(cv_ptr->image);
+    cv::Mat faceRecognition = detectAndDisplay(cvQueryFrame(capture));
+    //cv::Mat faceRecognition = detectAndDisplay(cv_ptr->image);
     cv::waitKey(3);
     cv::imshow(OPENCV_WINDOW, faceRecognition);
 }

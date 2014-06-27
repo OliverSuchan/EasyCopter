@@ -1,73 +1,70 @@
 #include "../include/EasyCopter/face_recognition.hpp"
 
 
-std::vector<cv::KeyPoint> FaceRecognition::getKeyPoints(cv::Mat p_cvImage, int p_iMinHessian)
+std::vector<cv::KeyPoint> FaceRecognition::getKeyPoints(cv::Mat p_cmImage, int p_iMinHessian)
 {
-    cv::FastFeatureDetector detector(p_iMinHessian);
+    cv::FastFeatureDetector cffdDetector(p_iMinHessian);
     std::vector<cv::KeyPoint> mpckpKeyPoints;
-    detector.detect( p_cvImage, mpckpKeyPoints );
+    cffdDetector.detect( p_cmImage, mpckpKeyPoints );
     return mpckpKeyPoints;
 }
 
-std::vector<cv::DMatch> FaceRecognition::getMatches(cv::Mat p_cvImagePrimary, cv::Mat p_cvImageSecondary, int p_iMinDist, int p_iMaxDist)
+std::vector<cv::DMatch> FaceRecognition::getMatches(cv::Mat p_cmImagePrimary, cv::Mat p_cmImageSecondary, int p_iMinDist, int p_iMaxDist)
 {
-    cv::SurfDescriptorExtractor extractor;
-    cv::Mat descriptors_1, descriptors_2;
+    cv::SurfDescriptorExtractor csdeExtractor;
+    cv::Mat cmPrimaryDescriptor, cmSecondaryDescriptor;
 
-    std::vector<cv::KeyPoint> keypoint_1 = getKeyPoints(p_cvImagePrimary);
-    std::vector<cv::KeyPoint> keypoint_2 = getKeyPoints(p_cvImageSecondary);
-    extractor.compute(p_cvImagePrimary, keypoint_1, descriptors_1);
-    extractor.compute(p_cvImageSecondary, keypoint_2, descriptors_2);
+    std::vector<cv::KeyPoint> mpckpPrimaryKeyPoints = getKeyPoints(p_cmImagePrimary);
+    std::vector<cv::KeyPoint> mpckpSecondaryKeyPoints = getKeyPoints(p_cmImageSecondary);
+    csdeExtractor.compute(p_cmImagePrimary, mpckpPrimaryKeyPoints, cmPrimaryDescriptor);
+    csdeExtractor.compute(p_cmImageSecondary, mpckpSecondaryKeyPoints, cmSecondaryDescriptor);
 
     cv::FlannBasedMatcher matcher;
     std::vector<cv::DMatch> matches;
 
-    if(descriptors_1.data && descriptors_2.data)
-        matcher.match(descriptors_1, descriptors_2, matches);
+    if(cmPrimaryDescriptor.data && cmSecondaryDescriptor.data)
+        matcher.match(cmPrimaryDescriptor, cmSecondaryDescriptor, matches);
     else
         return matches;
 
-    for( int i = 0; i < descriptors_1.rows; i++ )
+    for( int i = 0; i < cmPrimaryDescriptor.rows; i++ )
     {
-        double dist = matches[i].distance;
-        if( dist < p_iMinDist ) p_iMinDist = dist;
-        if( dist > p_iMaxDist ) p_iMaxDist = dist;
+        double dDist = matches[i].distance;
+        if( dDist < p_iMinDist ) p_iMinDist = dDist;
+        if( dDist > p_iMaxDist ) p_iMaxDist = dDist;
     }
 
-
-    std::vector<cv::DMatch> good_matches;
-    for( int i = 0; i < descriptors_1.rows; i++ )
+    std::vector<cv::DMatch> mpcdmGoodMatches;
+    for( int i = 0; i < cmPrimaryDescriptor.rows; i++ )
     {
         if(matches[i].distance <= 3 * p_iMinDist)
-            good_matches.push_back( matches[i]);
+            mpcdmGoodMatches.push_back( matches[i]);
     }
-    return good_matches;
+    return mpcdmGoodMatches;
 }
 
-bool FaceRecognition::matchImages(cv::Mat p_cvImagePrimary, cv::Mat p_cvImageScondary)
+bool FaceRecognition::matchImages(cv::Mat p_cmImagePrimary, cv::Mat p_cmImageScondary)
 {
-    std::vector<cv::KeyPoint> keypoints_object = getKeyPoints(p_cvImagePrimary);
-    std::vector<cv::KeyPoint> keypoints_scene = getKeyPoints(p_cvImageScondary);
+    std::vector<cv::KeyPoint> mpckpPrimaryKeyPoints = getKeyPoints(p_cmImagePrimary);
+    std::vector<cv::KeyPoint> mpckpSecondaryKeyPoints = getKeyPoints(p_cmImageScondary);
 
-    std::vector<cv::Point2f> obj;
-    std::vector<cv::Point2f> scene;
+    std::vector<cv::Point2f> mpcp2fPrimary;
+    std::vector<cv::Point2f> mpcp2fSecondary;
 
-    cv::Mat img_matches;
-    std::vector<cv::DMatch> good_matches = getMatches(p_cvImagePrimary, p_cvImageScondary);
-    cv::drawMatches( p_cvImagePrimary, keypoints_object, p_cvImageScondary, keypoints_scene,
-              good_matches, img_matches, cv::Scalar::all(-1), cv::Scalar::all(-1),
-              std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
+    std::vector<cv::DMatch> mpcdmGoodMatches = getMatches(p_cmImagePrimary, p_cmImageScondary);
+    if(!mpcdmGoodMatches.size() || mpcdmGoodMatches.size() < 4)
+        return false;
 
-    for( int i = 0; i < good_matches.size(); i++ )
+    for( int i = 0; i < mpcdmGoodMatches.size(); i++ )
     {
-        obj.push_back( keypoints_object[ good_matches[i].queryIdx ].pt );
-        scene.push_back( keypoints_scene[ good_matches[i].trainIdx ].pt );
+        mpcp2fPrimary.push_back( mpckpPrimaryKeyPoints[ mpcdmGoodMatches[i].queryIdx ].pt );
+        mpcp2fSecondary.push_back( mpckpSecondaryKeyPoints[ mpcdmGoodMatches[i].trainIdx ].pt );
     }
 
-    cv::Mat H;
+    cv::Mat cmHomography;
     try
     {
-        H = cv::findHomography(obj, scene, CV_RANSAC);
+        cmHomography = cv::findHomography(mpcp2fPrimary, mpcp2fSecondary, CV_RANSAC);
     }
     catch(std::exception)
     {

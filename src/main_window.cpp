@@ -144,7 +144,9 @@ void MainWindow::onAddDetectedFace(cv::Mat p_cmDetectedFace)
 
 void MainWindow::onSelectFace(QListWidgetItem *p_pqlwiItem)
 {
-    Globals::getInstance()->m_cmCurrentFace = m_mpcmImages.at(p_pqlwiItem->text().toInt() - 1);
+    Globals::getInstance()->m_cmCurrentFaces.clear();
+    for(auto aItem : ui.listWidget_2->selectedItems())
+        Globals::getInstance()->m_cmCurrentFaces.push_back(m_mpcmImages.at(aItem->text().toInt() - 1));
 }
 
 void MainWindow::on_pushButton_3_clicked()

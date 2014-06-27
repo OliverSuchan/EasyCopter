@@ -12,9 +12,9 @@
 class FaceRecognition
 {
 public:
-    std::vector<cv::KeyPoint> getKeyPoints(cv::Mat p_cvImage, int p_iMinHessian = 15);
-    std::vector<cv::DMatch> getMatches(cv::Mat p_cvImagePrimary, cv::Mat p_cvImageScondary, int p_iMinDist = 100, int p_iMaxDist = 0);
-    bool matchImages(cv::Mat p_cvImagePrimary, cv::Mat p_cvImageScondary);
+    std::vector<cv::KeyPoint> getKeyPoints(cv::Mat p_cmImage, int p_iMinHessian = 15);
+    std::vector<cv::DMatch> getMatches(cv::Mat p_cmImagePrimary, cv::Mat p_cmImageSecondary, int p_iMinDist = 100, int p_iMaxDist = 0);
+    bool matchImages(cv::Mat p_cmImagePrimary, cv::Mat p_cmImageScondary);
 
 };
 

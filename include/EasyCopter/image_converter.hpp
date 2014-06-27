@@ -33,7 +33,7 @@ class ImageConverter
   void imageCb(const sensor_msgs::ImageConstPtr& msg);
   image_transport::Subscriber image_sub;
 
-  //CvCapture* capture;
+  CvCapture* capture;
 
 public:
   ImageConverter(int argc, char **argv);
