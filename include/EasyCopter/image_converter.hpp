@@ -16,7 +16,9 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <iostream>
+#include <thread>
 #include "flightcontroller.hpp"
+#include "face_recognition.hpp"
 
 static const std::string OPENCV_WINDOW = "Image window";
 static std::string face_cascade_name = "haarcascade_frontalface_alt.xml";
@@ -29,11 +31,14 @@ class ImageConverter
   void init(int argc, char** argv);
   cv::Mat detectAndDisplay(cv::Mat frame);
   void imageCb(const sensor_msgs::ImageConstPtr& msg);
+  image_transport::Subscriber image_sub;
+
   //CvCapture* capture;
 
 public:
   ImageConverter(int argc, char **argv);
   ~ImageConverter();
+  void shutdown();
 
 };
 

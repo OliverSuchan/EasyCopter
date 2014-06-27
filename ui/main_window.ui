@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>625</width>
-    <height>410</height>
+    <width>654</width>
+    <height>444</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,59 +23,139 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>0</number>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="title">
+       <string>Control</string>
       </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Steuerung</string>
-       </attribute>
-       <widget class="QLabel" name="label_4">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>30</y>
-          <width>211</width>
-          <height>281</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;W: Fly upward&lt;/p&gt;&lt;p&gt;S: Fly downward&lt;/p&gt;&lt;p&gt;A: Turn left (counter clockwise)&lt;/p&gt;&lt;p&gt;D: Turn right (clockwise)&lt;/p&gt;&lt;p&gt;Arrow Up: Fly forward&lt;/p&gt;&lt;p&gt;Arrow Down: Fly backward&lt;/p&gt;&lt;p&gt;Arrow Left: Fly left&lt;/p&gt;&lt;p&gt;Arrow Right: Fly right&lt;/p&gt;&lt;p&gt;O: Take off&lt;/p&gt;&lt;p&gt;L: Land&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>OpenCV</string>
-       </attribute>
-       <widget class="QPushButton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>150</y>
-          <width>80</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Starten</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>100</y>
-          <width>161</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Geischtstracking An/Aus</string>
-        </property>
-       </widget>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="tabShape">
+          <enum>QTabWidget::Rounded</enum>
+         </property>
+         <property name="currentIndex">
+          <number>1</number>
+         </property>
+         <property name="elideMode">
+          <enum>Qt::ElideMiddle</enum>
+         </property>
+         <property name="documentMode">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="tab_3">
+          <attribute name="title">
+           <string>Steuerung</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;W: Fly upward&lt;/p&gt;&lt;p&gt;S: Fly downward&lt;/p&gt;&lt;p&gt;A: Turn left (counter clockwise)&lt;/p&gt;&lt;p&gt;D: Turn right (clockwise)&lt;/p&gt;&lt;p&gt;Arrow Up: Fly forward&lt;/p&gt;&lt;p&gt;Arrow Down: Fly backward&lt;/p&gt;&lt;p&gt;Arrow Left: Fly left&lt;/p&gt;&lt;p&gt;Arrow Right: Fly right&lt;/p&gt;&lt;p&gt;O: Take off&lt;/p&gt;&lt;p&gt;L: Land&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_4">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+            <horstretch>100</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <attribute name="title">
+           <string>Bildverarbeitung</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QPushButton" name="pushButton_3">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>256</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>57</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Geischtstracking An/Aus</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>256</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>57</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Starten</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QListWidget" name="listWidget_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="flow">
+              <enum>QListView::LeftToRight</enum>
+             </property>
+             <property name="isWrapping" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="viewMode">
+              <enum>QListView::IconMode</enum>
+             </property>
+             <property name="uniformItemSizes">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
@@ -85,7 +165,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>625</width>
+     <width>654</width>
      <height>20</height>
     </rect>
    </property>

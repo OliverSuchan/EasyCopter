@@ -1,7 +1,8 @@
 #include "../include/EasyCopter/flightcontroller.hpp"
 
 Globals::Globals()
-    : m_dLinearAcceleration(1.0),
+    : QObject(),
+      m_dLinearAcceleration(1.0),
       m_dAngularAcceleration(1.0),
       m_dActivateFaceDetection(false)
 {
@@ -27,8 +28,13 @@ Globals::~Globals()
 }
 
 
-Globals &Globals::getInstance()
+Globals *Globals::getInstance()
 {
-    static Globals gloInstance;
+    static Globals *gloInstance = new Globals();
     return gloInstance;
+}
+
+void Globals::addDetectedFace(cv::Mat p_cmDetectedFace)
+{
+    emit addDetectedFaceSig(p_cmDetectedFace);
 }

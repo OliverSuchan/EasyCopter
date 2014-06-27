@@ -1,14 +1,16 @@
 #ifndef __GLOBALS_H
 #define __GLOBALS_H
 
+#include <QObject>
 #include <vector>
 #include <tuple>
 #include <functional>
+#include <opencv2/imgproc/imgproc.hpp>
 
-class FlightController;
-
-class Globals
+class Globals : public QObject
 {
+    Q_OBJECT
+
 public:
     enum CommandType
     {
@@ -16,11 +18,16 @@ public:
         SUBSTITUTE
     };
 
-    static Globals &getInstance();
+    static Globals *getInstance();
     std::vector<std::tuple<int, std::function<void()>>> m_rgtpivpKeyEvents;
     double m_dLinearAcceleration;
     double m_dAngularAcceleration;
     bool m_dActivateFaceDetection;
+    cv::Mat m_cmCurrentFace;
+    void addDetectedFace(cv::Mat p_cmDetectedFace);
+
+signals:
+    void addDetectedFaceSig(cv::Mat p_cmDetectedFace);
 
 private:
     Globals();
