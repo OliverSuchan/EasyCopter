@@ -22,28 +22,28 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(int argc, char **argv, QWidget *parent = 0);
+    MainWindow(int p_Argc, char** p_Argv, QWidget *p_Parent = 0);
     ~MainWindow();
 
 protected:
-    void keyPressEvent(QKeyEvent *p_pqkeKeyEvent);
-    void closeEvent(QCloseEvent *p_pqceCloseEvent);
+    void keyPressEvent(QKeyEvent *p_KeyEvent);
+    void closeEvent(QCloseEvent *p_CloseEvent);
 
 private slots:
-    void on_button_connect_clicked(bool check);
-    void on_checkbox_use_environment_stateChanged(int state);
-    void onAddDetectedFace(cv::Mat p_cmDetectedFace);
-    void onSelectFace(QListWidgetItem *p_pqlwiItem);
+    void on_checkbox_use_environment_stateChanged(int p_State);
+    void onAddDetectedFace(cv::Mat p_DetectedFace);
+    void onSelectFace(QListWidgetItem *p_ListItem);
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
+    void on_button_connect_clicked();
 
 private:
-    Ui::MainWindowDesign ui;
+    Ui::MainWindowDesign m_Ui;
     void readSettings();
     void writeSettings();
     void showNoMasterMessage();
-    std::vector<cv::Mat> m_mpcmImages;
-    ImageConverter *m_picImageConverter;
+    std::vector<cv::Mat> m_TempImages;
+    ImageConverter *m_ImageConverter;
 
 };
 

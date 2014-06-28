@@ -3,22 +3,22 @@
 void FlightController::run()
 {
     std::cerr << "Started Thread" << std::endl;
-    while(!m_bStop.load() && m_prnhFlightControllerNodeHandle->ok())
+    while(!m_Stop.load() && m_FlightControllerNodeHandle->ok())
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(m_iFrequency));
-        if(m_bRunLastCommand.load())
-            publishCommand(m_gmtLastCommand);
+        std::this_thread::sleep_for(std::chrono::milliseconds(m_Frequency));
+        if(m_RunLastCommand.load())
+            publishCommand(m_LastCommand);
         else
             publishCommand(geometry_msgs::Twist());
     }
 
-    if(m_prnhFlightControllerNodeHandle->ok()) ros::shutdown();
+    if(m_FlightControllerNodeHandle->ok()) ros::shutdown();
 }
 
-FlightController::FlightController(int p_iArgc, char **p_ppcArgv)
+FlightController::FlightController(int p_Argc, char **p_Argv)
 {
-    ros::init(p_iArgc, p_ppcArgv, "FlightController");
-    m_ctCurrentCommandType = Globals::INSERT;
+    ros::init(p_Argc, p_Argv, "FlightController");
+    m_CurrentCommandType = Globals::INSERT;
 }
 
 FlightController::~FlightController()
@@ -38,51 +38,51 @@ bool FlightController::isConnected()
     return ros::ok();
 }
 
-void FlightController::publishCommand(geometry_msgs::Twist p_gmtCommand)
+void FlightController::publishCommand(geometry_msgs::Twist p_Command)
 {
-    m_muThreadMutex.lock();
-    geometry_msgs::Twist gmtCommandToPublish = p_gmtCommand;
-    if(m_ctCurrentCommandType == Globals::INSERT)
+    m_ThreadMutex.lock();
+    geometry_msgs::Twist CommandToPublish = p_Command;
+    if(m_CurrentCommandType == Globals::INSERT)
     {
-        gmtCommandToPublish.linear.x = p_gmtCommand.linear.x + m_gmtLastCommand.linear.x;
-        gmtCommandToPublish.linear.y = p_gmtCommand.linear.y + m_gmtLastCommand.linear.y;
-        gmtCommandToPublish.linear.z = p_gmtCommand.linear.z + m_gmtLastCommand.linear.z;
-        gmtCommandToPublish.angular.x = p_gmtCommand.angular.x + m_gmtLastCommand.angular.x;
-        gmtCommandToPublish.angular.y = p_gmtCommand.angular.y + m_gmtLastCommand.angular.y;
-        gmtCommandToPublish.angular.z = p_gmtCommand.angular.z + m_gmtLastCommand.angular.z;
+        CommandToPublish.linear.x = p_Command.linear.x + m_LastCommand.linear.x;
+        CommandToPublish.linear.y = p_Command.linear.y + m_LastCommand.linear.y;
+        CommandToPublish.linear.z = p_Command.linear.z + m_LastCommand.linear.z;
+        CommandToPublish.angular.x = p_Command.angular.x + m_LastCommand.angular.x;
+        CommandToPublish.angular.y = p_Command.angular.y + m_LastCommand.angular.y;
+        CommandToPublish.angular.z = p_Command.angular.z + m_LastCommand.angular.z;
     }
-    m_rpFlightControllerPublisher.publish(gmtCommandToPublish);
-    m_gmtLastCommand = p_gmtCommand;
-    m_muThreadMutex.unlock();
+    m_FlightControllerPublisher.publish(CommandToPublish);
+    m_LastCommand = p_Command;
+    m_ThreadMutex.unlock();
 }
 
 
 void FlightController::takeOff()
 {
-    m_muThreadMutex.lock();
-    m_rpTakeOffPublisher.publish(std_msgs::Empty());
-    m_muThreadMutex.unlock();
+    m_ThreadMutex.lock();
+    m_TakeOffPublisher.publish(std_msgs::Empty());
+    m_ThreadMutex.unlock();
 }
 
 void FlightController::land()
 {
-    m_muThreadMutex.lock();
-    m_rpLandPublisher.publish(std_msgs::Empty());
-    m_muThreadMutex.unlock();
+    m_ThreadMutex.lock();
+    m_LandPublisher.publish(std_msgs::Empty());
+    m_ThreadMutex.unlock();
 }
 
 void FlightController::startThread()
 {
-    m_prnhFlightControllerNodeHandle = new ros::NodeHandle();
-    m_rpFlightControllerPublisher = m_prnhFlightControllerNodeHandle->advertise<geometry_msgs::Twist>(m_prnhFlightControllerNodeHandle->resolveName("cmd_vel"),1);
-    m_rpTakeOffPublisher = m_prnhFlightControllerNodeHandle->advertise<std_msgs::Empty>(m_prnhFlightControllerNodeHandle->resolveName("ardrone/takeoff"),1);
-    m_rpLandPublisher = m_prnhFlightControllerNodeHandle->advertise<std_msgs::Empty>(m_prnhFlightControllerNodeHandle->resolveName("ardrone/land"), 1);
+    m_FlightControllerNodeHandle = new ros::NodeHandle();
+    m_FlightControllerPublisher = m_FlightControllerNodeHandle->advertise<geometry_msgs::Twist>(m_FlightControllerNodeHandle->resolveName("cmd_vel"),1);
+    m_TakeOffPublisher = m_FlightControllerNodeHandle->advertise<std_msgs::Empty>(m_FlightControllerNodeHandle->resolveName("ardrone/takeoff"),1);
+    m_LandPublisher = m_FlightControllerNodeHandle->advertise<std_msgs::Empty>(m_FlightControllerNodeHandle->resolveName("ardrone/land"), 1);
     try
     {
-        m_bStop.store(false);
-        m_bRunLastCommand.store(false);
-        m_iFrequency = 100;
-        m_pthrThread = new std::thread(&FlightController::run, this);
+        m_Stop.store(false);
+        m_RunLastCommand.store(false);
+        m_Frequency = 100;
+        m_Thread = new std::thread(&FlightController::run, this);
     }
     catch(std::exception &e)
     {
@@ -92,35 +92,35 @@ void FlightController::startThread()
 
 void FlightController::stopThread()
 {
-    m_bStop.store(true);
-    m_pthrThread->join();
+    m_Stop.store(true);
+    m_Thread->join();
 }
 
-void FlightController::setAutoRepeat(int p_iFrequency)
+void FlightController::setAutoRepeat(int p_Frequency)
 {
-    m_muThreadMutex.lock();
-    m_iFrequency = p_iFrequency;
-    m_muThreadMutex.unlock();
+    m_ThreadMutex.lock();
+    m_Frequency = p_Frequency;
+    m_ThreadMutex.unlock();
 }
 
-void FlightController::setRunLastCommand(bool p_bRunLastCommand)
+void FlightController::setRunLastCommand(bool p_RunLastCommand)
 {
-    m_bRunLastCommand.store(p_bRunLastCommand);
+    m_RunLastCommand.store(p_RunLastCommand);
 }
 
-void FlightController::setCommandType(Globals::CommandType p_ctCommandType)
+void FlightController::setCommandType(Globals::CommandType p_CommandType)
 {
-    m_ctCurrentCommandType = p_ctCommandType;
+    m_CurrentCommandType = p_CommandType;
 }
 
 Globals::CommandType FlightController::getCommandType()
 {
-    return m_ctCurrentCommandType;
+    return m_CurrentCommandType;
 }
 
 FlightController &FlightController::getInstance()
 {
-    static FlightController fcController(0, NULL);
-    return fcController;
+    static FlightController FlightController(0, NULL);
+    return FlightController;
 }
 

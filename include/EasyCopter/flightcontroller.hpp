@@ -15,20 +15,20 @@
 class FlightController
 {
 private:
-    ros::NodeHandle *m_prnhFlightControllerNodeHandle;
-    ros::Publisher m_rpFlightControllerPublisher;
-    ros::Publisher m_rpTakeOffPublisher;
-    ros::Publisher m_rpLandPublisher;
-    ros::Rate *m_prrLoopRate;
-    std::mutex m_muThreadMutex;
-    std::thread *m_pthrThread;
-    std::atomic<bool> m_bStop;
-    std::atomic<bool> m_bRunLastCommand;
-    geometry_msgs::Twist m_gmtLastCommand;
-    Globals::CommandType m_ctCurrentCommandType;
-    int m_iFrequency;
+    ros::NodeHandle *m_FlightControllerNodeHandle;
+    ros::Publisher m_FlightControllerPublisher;
+    ros::Publisher m_TakeOffPublisher;
+    ros::Publisher m_LandPublisher;
+    ros::Rate *m_LoopRate;
+    std::mutex m_ThreadMutex;
+    std::thread *m_Thread;
+    std::atomic<bool> m_Stop;
+    std::atomic<bool> m_RunLastCommand;
+    geometry_msgs::Twist m_LastCommand;
+    Globals::CommandType m_CurrentCommandType;
+    int m_Frequency;
     void run();
-    FlightController(int p_iArgc, char **p_ppcArgv);
+    FlightController(int p_Argc, char **p_Argv);
     FlightController(FlightController const&) = delete;
     FlightController& operator =(FlightController const&) = delete;
     ~FlightController();
@@ -36,14 +36,14 @@ private:
 public:
 
     bool isConnected();
-    void publishCommand(geometry_msgs::Twist p_gmtCommand);
+    void publishCommand(geometry_msgs::Twist p_Command);
     void takeOff();
     void land();
     void startThread();
     void stopThread();
-    void setAutoRepeat(int p_iFrequency);
-    void setRunLastCommand(bool p_bRunLastCommand);
-    void setCommandType(Globals::CommandType p_ctCommandType);
+    void setAutoRepeat(int p_Frequency);
+    void setRunLastCommand(bool p_RunLastCommand);
+    void setCommandType(Globals::CommandType p_CommandType);
     Globals::CommandType getCommandType();
     static FlightController &getInstance();
 

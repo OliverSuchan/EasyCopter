@@ -19,15 +19,15 @@ public:
     };
 
     static Globals *getInstance();
-    std::vector<std::tuple<int, std::function<void()>>> m_rgtpivpKeyEvents;
-    double m_dLinearAcceleration;
-    double m_dAngularAcceleration;
-    bool m_dActivateFaceDetection;
-    std::vector<cv::Mat> m_cmCurrentFaces;
-    void addDetectedFace(cv::Mat p_cmDetectedFace);
+    std::vector<std::tuple<int, std::function<void()>>> m_KeyEvents;
+    double m_LinearAcceleration;
+    double m_AngularAcceleration;
+    bool m_ActivateFaceDetection;
+    std::vector<cv::Mat> m_CurrentFaces;
+    void addDetectedFace(cv::Mat p_DetectedFace);
 
 signals:
-    void addDetectedFaceSig(cv::Mat p_cmDetectedFace);
+    void addDetectedFaceSig(cv::Mat p_DetectedFace);
 
 private:
     Globals();
