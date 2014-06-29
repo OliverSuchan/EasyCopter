@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>EasyCopter: C:/Users/Owley/Downloads/EasyCopter-master/include/EasyCopter/flightcontroller.h Quellcode</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">EasyCopter
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.6 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Klassen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('flightcontroller_8h_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Klassen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Dateien</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Aufzählungen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Aufzählungswerte</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Makrodefinitionen</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">flightcontroller.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="flightcontroller_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __FLIGHT_CONTROLLER_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define __FLIGHT_CONTROLLER_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;ros/ros.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;std_msgs/Empty.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;std_msgs/String.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;geometry_msgs/Twist.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;globals.hpp&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_flight_controller.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_flight_controller.html">FlightController</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    ros::NodeHandle *m_FlightControllerNodeHandle;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    ros::Publisher m_FlightControllerPublisher;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    ros::Publisher m_TakeOffPublisher;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    ros::Publisher m_LandPublisher;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    std::mutex m_ThreadMutex;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    std::thread *m_Thread;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::atomic&lt;bool&gt; m_Stop;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    std::atomic&lt;bool&gt; m_RunLastCommand;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    geometry_msgs::Twist m_LastCommand;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="class_globals.html#a3b8e1b6a48cb763e26f8b0b8e464ea87">Globals::CommandType</a> m_CurrentCommandType;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">int</span> m_Frequency;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> run();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <a class="code" href="class_flight_controller.html">FlightController</a>(<span class="keywordtype">int</span> p_Argc, <span class="keywordtype">char</span> **p_Argv);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="class_flight_controller.html">FlightController</a>(<a class="code" href="class_flight_controller.html">FlightController</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="class_flight_controller.html">FlightController</a>&amp; operator =(<a class="code" href="class_flight_controller.html">FlightController</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    ~<a class="code" href="class_flight_controller.html">FlightController</a>();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_flight_controller.html#ad946b5aedea5de80357534efc045f6d3">isConnected</a>();</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_flight_controller.html#afd860d68c0bc863fea90058093c7a01f">publishCommand</a>(geometry_msgs::Twist p_Command);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_flight_controller.html#a514f2619b98216e9fca0ad876d000966">takeOff</a>();</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_flight_controller.html#ad7a3e79dd1467f26dea5f241908acd16">land</a>();</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_flight_controller.html#aa6ac2418c738acf33d4598475e5be040">startThread</a>();</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_flight_controller.html#ad28e37dfa101cd1fc397fed88ab19351">stopThread</a>();</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_flight_controller.html#a16e37645ab96f5af84aab8dd034fb168">setAutoRepeat</a>(<span class="keywordtype">int</span> p_Frequency);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_flight_controller.html#a09dd13b2aaf2a117e4f4d66f34bd96c1">setRunLastCommand</a>(<span class="keywordtype">bool</span> p_RunLastCommand);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_flight_controller.html#abf353f49c71f55905ccba712d2a5e599">setCommandType</a>(<a class="code" href="class_globals.html#a3b8e1b6a48cb763e26f8b0b8e464ea87">Globals::CommandType</a> p_CommandType);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <a class="code" href="class_globals.html#a3b8e1b6a48cb763e26f8b0b8e464ea87">Globals::CommandType</a> <a class="code" href="class_flight_controller.html#a28d873e95b9001b8933f209959417ebd">getCommandType</a>();</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_flight_controller.html">FlightController</a> &amp;<a class="code" href="class_flight_controller.html#ab94796609c37387283164dda07d885a0">getInstance</a>();</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;};</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="preprocessor">#endif //__FLIGHT_CONTROLLER_H</span></div>
+<div class="ttc" id="class_flight_controller_html_abf353f49c71f55905ccba712d2a5e599"><div class="ttname"><a href="class_flight_controller.html#abf353f49c71f55905ccba712d2a5e599">FlightController::setCommandType</a></div><div class="ttdeci">void setCommandType(Globals::CommandType p_CommandType)</div><div class="ttdoc">Legt den Modus fest, wie Kommandos ausgeführt werden sollen. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:111</div></div>
+<div class="ttc" id="class_flight_controller_html_ad7a3e79dd1467f26dea5f241908acd16"><div class="ttname"><a href="class_flight_controller.html#ad7a3e79dd1467f26dea5f241908acd16">FlightController::land</a></div><div class="ttdeci">void land()</div><div class="ttdoc">Sendet den Befehl &quot;landen&quot; an ROS. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:67</div></div>
+<div class="ttc" id="class_flight_controller_html_a514f2619b98216e9fca0ad876d000966"><div class="ttname"><a href="class_flight_controller.html#a514f2619b98216e9fca0ad876d000966">FlightController::takeOff</a></div><div class="ttdeci">void takeOff()</div><div class="ttdoc">Sendet den Befehl &quot;abheben&quot; an ROS. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:60</div></div>
+<div class="ttc" id="class_flight_controller_html_ab94796609c37387283164dda07d885a0"><div class="ttname"><a href="class_flight_controller.html#ab94796609c37387283164dda07d885a0">FlightController::getInstance</a></div><div class="ttdeci">static FlightController &amp; getInstance()</div><div class="ttdoc">Liefert die Singleton-Instanz des FlightControllers. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:121</div></div>
+<div class="ttc" id="class_flight_controller_html_aa6ac2418c738acf33d4598475e5be040"><div class="ttname"><a href="class_flight_controller.html#aa6ac2418c738acf33d4598475e5be040">FlightController::startThread</a></div><div class="ttdeci">void startThread()</div><div class="ttdoc">Startet den Thread. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:74</div></div>
+<div class="ttc" id="class_flight_controller_html_a28d873e95b9001b8933f209959417ebd"><div class="ttname"><a href="class_flight_controller.html#a28d873e95b9001b8933f209959417ebd">FlightController::getCommandType</a></div><div class="ttdeci">Globals::CommandType getCommandType()</div><div class="ttdoc">Gibt den aktuell verwendeten Kommando-Typ zurück. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:116</div></div>
+<div class="ttc" id="class_flight_controller_html_afd860d68c0bc863fea90058093c7a01f"><div class="ttname"><a href="class_flight_controller.html#afd860d68c0bc863fea90058093c7a01f">FlightController::publishCommand</a></div><div class="ttdeci">void publishCommand(geometry_msgs::Twist p_Command)</div><div class="ttdoc">Übergibt Kommandos an ROS zur Steuerung der Drohne. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:41</div></div>
+<div class="ttc" id="class_globals_html_a3b8e1b6a48cb763e26f8b0b8e464ea87"><div class="ttname"><a href="class_globals.html#a3b8e1b6a48cb763e26f8b0b8e464ea87">Globals::CommandType</a></div><div class="ttdeci">CommandType</div><div class="ttdoc">Verschiedenen Kommando-Arten.  INSERT:  </div><div class="ttdef"><b>Definition:</b> globals.h:29</div></div>
+<div class="ttc" id="class_flight_controller_html_a16e37645ab96f5af84aab8dd034fb168"><div class="ttname"><a href="class_flight_controller.html#a16e37645ab96f5af84aab8dd034fb168">FlightController::setAutoRepeat</a></div><div class="ttdeci">void setAutoRepeat(int p_Frequency)</div><div class="ttdoc">Legt die Frequenz fest, wann Kommanos ausgeführt werden sollen. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:99</div></div>
+<div class="ttc" id="class_flight_controller_html"><div class="ttname"><a href="class_flight_controller.html">FlightController</a></div><div class="ttdoc">Klasse die das Singleton-Designpattern  anwendet und für die Steuerung der Drohne zuständig ist...</div><div class="ttdef"><b>Definition:</b> flightcontroller.h:19</div></div>
+<div class="ttc" id="class_flight_controller_html_a09dd13b2aaf2a117e4f4d66f34bd96c1"><div class="ttname"><a href="class_flight_controller.html#a09dd13b2aaf2a117e4f4d66f34bd96c1">FlightController::setRunLastCommand</a></div><div class="ttdeci">void setRunLastCommand(bool p_RunLastCommand)</div><div class="ttdoc">Gibt an, ob das vorherige Kommando ausgeführt werden soll. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:106</div></div>
+<div class="ttc" id="class_flight_controller_html_ad28e37dfa101cd1fc397fed88ab19351"><div class="ttname"><a href="class_flight_controller.html#ad28e37dfa101cd1fc397fed88ab19351">FlightController::stopThread</a></div><div class="ttdeci">void stopThread()</div><div class="ttdoc">Stoppt den Thread. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:93</div></div>
+<div class="ttc" id="class_flight_controller_html_ad946b5aedea5de80357534efc045f6d3"><div class="ttname"><a href="class_flight_controller.html#ad946b5aedea5de80357534efc045f6d3">FlightController::isConnected</a></div><div class="ttdeci">bool isConnected()</div><div class="ttdoc">Überprüft, ob die Verbindung zu ROS besteht. </div><div class="ttdef"><b>Definition:</b> flightcontroller.cpp:36</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_2c12105386bcc5c3935feab96f296a41.html">Downloads</a></li><li class="navelem"><a class="el" href="dir_eaf9cec56f833235b3cfe45948825bb7.html">EasyCopter-master</a></li><li class="navelem"><a class="el" href="dir_bf27352c9e7508e57cf1d1a37edbda1a.html">include</a></li><li class="navelem"><a class="el" href="dir_163414bdfc5a88b198fb58cfceb2e3f8.html">EasyCopter</a></li><li class="navelem"><a class="el" href="flightcontroller_8h.html">flightcontroller.h</a></li>
+    <li class="footer">Erzeugt am Mon Jun 30 2014 01:16:41 für EasyCopter von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
+</body>
+</html>
