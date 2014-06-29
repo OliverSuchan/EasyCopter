@@ -20,26 +20,98 @@
 #include "flightcontroller.hpp"
 #include "face_recognition.hpp"
 
+/**
+  * @brief Ist der Wert 1, so werden Ausgaben getätigt,<BR>
+  * die den Verlauf des Programmes darstellen sollen
+  */
 #define DEBUG_MODE 0
 
+
+/**
+ * @brief Name des OpenCV-Fensters, indem<BR>
+ * die Kamerabilder der Drohne angezeigt werden sollen
+ */
 static const std::string OPENCV_WINDOW = "Image window";
+
+/**
+ * @brief Dateiname für die "text-based"-Gesichtserkennung
+ */
 static std::string faceCascadeName = "haarcascade_frontalface_alt.xml";
+
+/**
+ * @brief Dateiname für die "text-based"-Augenerkennung
+ */
 static std::string eyesCascadeName = "haarcascade_eye_tree_eyeglasses.xml";
+
+/**
+ * @brief CascadeClassifier, der die geladene "text-based"-Gesichtserkennung,<BR>
+ * in Form einer Klasse darstellt
+ */
 static cv::CascadeClassifier faceCascade;
+
+/**
+ * @brief CascadeClassifier, der die geladene "text-based"-Augenerkennung,<BR>
+ * in Form einer Klasse darstellt
+ */
 static cv::CascadeClassifier eyesCascade;
 
+/**
+ * @brief Verarbeitet die eingehenden Kamerabilder der Drohne
+ */
 class ImageConverter
 {
-  void init(int p_Argc, char** p_Argv);
-  cv::Mat detectAndDisplay(cv::Mat p_Frame);
-  void imageUpdate(const sensor_msgs::ImageConstPtr& p_Message);
-  image_transport::Subscriber imageSubscription;
-  CvCapture* m_Capture;
+
+    /**
+     * @brief Initiiert die Verbindung zu ROS
+     * @param p_Argc Anzahl der Argument
+     * @param p_Argv Argumente
+     */
+    void init(int p_Argc, char** p_Argv);
+
+    /**
+     * @brief Erkennt Gesichter und markiert diese<BR>
+     * auf den einzelnen eingehenden Kamerabildern der Drohne<BR>
+     * (inklusive Augen)
+     * @param p_Frame Kamerabild der Drohne
+     * @return bearbeitetes Kamerabild, mit detektierten Gesichtern und Augen
+     */
+    cv::Mat detectAndDisplay(cv::Mat p_Frame);
+
+    /**
+     * @brief Wird aufgerufen, sobald sich das Kamerabild ändert
+     * @param p_Message Kamerabild
+     */
+    void imageUpdate(const sensor_msgs::ImageConstPtr& p_Message);
+
+    /**
+     * @brief Abonnement für das Kamerabild
+     */
+    image_transport::Subscriber imageSubscription;
+
+    /**
+     * @brief Wird für den "DEBUG_MODE" benötigt.<BR>
+     * Wird verwendet um ein Video zu laden, was dann bearbeitet wird
+     */
+    CvCapture* m_Capture;
 
 public:
-  ImageConverter(int p_Argc, char ** p_Argv);
-  ~ImageConverter();
-  void shutdown();
+
+    /**
+     * @brief Konstruktor zum Erzeugen einer ImageConverter-Instanz
+     * @param p_Argc Anzahl der Argumente
+     * @param p_Argv Argumente
+     */
+    ImageConverter(int p_Argc, char ** p_Argv);
+
+    /**
+      * @brief Standard-Destruktor
+      */
+    ~ImageConverter();
+
+    /**
+     * @brief "Runterfahren" der ImageConverter-Instanz
+     */
+    void shutdown();
 
 };
 

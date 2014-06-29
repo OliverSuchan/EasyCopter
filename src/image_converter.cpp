@@ -1,6 +1,5 @@
 #include "../include/EasyCopter/image_converter.hpp"
 
-
 void ImageConverter::init(int p_Argc, char** p_Argv)
 {
     ros::init(p_Argc, p_Argv, "image_converter");
@@ -15,7 +14,7 @@ ImageConverter::ImageConverter(int p_Argc, char ** p_Argv)
     cv::namedWindow(OPENCV_WINDOW, CV_WINDOW_KEEPRATIO);
     if(DEBUG_MODE)
     {
-        //capture = cvCaptureFromCAM(-1);
+        //m_Capture = cvCaptureFromCAM(-1);
         m_Capture = cvCaptureFromFile("/home/owley/Downloads/Who the FK is LeFloid.mp4");
     }
     faceCascade.load(faceCascadeName);
@@ -80,34 +79,26 @@ cv::Mat ImageConverter::detectAndDisplay(cv::Mat p_Frame)
             {
                 if(DEBUG_MODE)
                     std::cout << "rechts drehen" << std::endl;
-                geometry_msgs::Twist command;
-                command.angular.z = -Globals::getInstance()->m_AngularAcceleration;
-                FlightController::getInstance().publishCommand(command);
+                Globals::getInstance()->executeKey(Qt::Key_D);
             }
             else
             {
                 if(DEBUG_MODE)
                     std::cout << "links drehen" << std::endl;
-                geometry_msgs::Twist command;
-                command.angular.z = Globals::getInstance()->m_AngularAcceleration;
-                FlightController::getInstance().publishCommand(command);
+                Globals::getInstance()->executeKey(Qt::Key_A);
             }
 
             if(faceToMatch.y + faceToMatch.height / 2 < (frameGray.rows - faceToMatch.height) / 2)
             {
                 if(DEBUG_MODE)
                     std::cout << "runter" << std::endl;
-                geometry_msgs::Twist command;
-                command.linear.z = -Globals::getInstance()->m_LinearAcceleration;
-                FlightController::getInstance().publishCommand(command);
+                Globals::getInstance()->executeKey(Qt::Key_S);
             }
             else
             {
                 if(DEBUG_MODE)
                     std::cout << "hoch" << std::endl;
-                geometry_msgs::Twist command;
-                command.linear.z = Globals::getInstance()->m_LinearAcceleration;
-                FlightController::getInstance().publishCommand(command);
+                Globals::getInstance()->executeKey(Qt::Key_W);
             }
 
             double distance = 15 * f / faces[0].width;
@@ -116,17 +107,13 @@ cv::Mat ImageConverter::detectAndDisplay(cv::Mat p_Frame)
             {
                 if(DEBUG_MODE)
                     std::cout << "vorwärts" << std::endl;
-                geometry_msgs::Twist command;
-                command.linear.x = Globals::getInstance()->m_LinearAcceleration;
-                FlightController::getInstance().publishCommand(command);
+                Globals::getInstance()->executeKey(Qt::Key_Up);
             }
             else if(distance <= 20)
             {
                 if(DEBUG_MODE)
                     std::cout << "rückwärts" << std::endl;
-                geometry_msgs::Twist command;
-                command.linear.x = -Globals::getInstance()->m_LinearAcceleration;
-                FlightController::getInstance().publishCommand(command);
+                Globals::getInstance()->executeKey(Qt::Key_Down);
             }
         }
     }

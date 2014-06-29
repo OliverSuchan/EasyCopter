@@ -34,6 +34,13 @@ Globals *Globals::getInstance()
     return GlobalsInstance;
 }
 
+void Globals::executeKey(int keyToExecute)
+{
+    for(std::tuple<int, std::function<void()> > tupleItem : m_KeyEvents)
+        if(std::get<0>(tupleItem) == keyToExecute)
+            std::get<1>(tupleItem)();
+}
+
 void Globals::addDetectedFace(cv::Mat p_DetectedFace)
 {
     emit addDetectedFaceSig(p_DetectedFace);
